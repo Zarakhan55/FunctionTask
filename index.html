@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function</title>
+</head>
+<body>
+    <h1>Function Assignment</h1>
+</body>
+
+<script>
+ <!-- Question1: A student has marks in three subjects: English = 75, Mathematics = 85, and Computer = 90.Write a JavaScript function that takes the three marks as parameters, calculates the student's total marks, and returns the result. -->
+
+function calculateTotal(english, mathematics, computer) {
+    let total = english + mathematics + computer;
+    return total;
+}
+
+let result = calculateTotal(75, 85, 90);
+
+console.log("Total Marks:", result);
+
+<!-- Question2:A ride-booking app charges a passenger based on the distance travelled.The fare is Rs. 100 base fare + Rs. 50 for every kilometer.Write a JavaScript function that takes the number of kilometers as input, calculates the total ride fare, and returns the final amount. -->
+function calculateRideFare(kilometers) {
+    let baseFare = 100;
+    let farePerKm = 50;
+
+    let totalFare = baseFare + (kilometers * farePerKm);
+
+    return totalFare;
+}
+
+let fare = calculateRideFare(8);
+
+console.log("Total Ride Fare: Rs.", fare);
+
+</script>
+</html>
