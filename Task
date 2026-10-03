@@ -1,0 +1,121 @@
+function smartDelivery(
+    weight,
+    distance,
+    packageValue,
+    weather,
+    roadCondition,
+    deliveryType,
+    failedAttempts,
+    customerPriority
+) {
+
+    // Calculate delivery cost
+    let deliveryCost = 200;
+
+    deliveryCost = deliveryCost + (distance * 20);
+
+    if (weight > 5) {
+        let extraWeight = weight - 5;
+        deliveryCost = deliveryCost + (extraWeight * 100);
+    }
+
+    if (deliveryType.toLowerCase() === "express") {
+        deliveryCost = deliveryCost + 500;
+    }
+
+
+    // Calculate risk
+    let risk = 0;
+
+    if (weather.toLowerCase() === "rain") {
+        risk = risk + 20;
+    }
+    else if (weather.toLowerCase() === "storm") {
+        risk = risk + 40;
+    }
+
+    if (roadCondition.toLowerCase() === "bad") {
+        risk = risk + 25;
+    }
+
+    if (packageValue > 100000) {
+        risk = risk + 30;
+    }
+
+    risk = risk + (failedAttempts * 10);
+
+    if (customerPriority.toLowerCase() === "vip") {
+        risk = risk - 15;
+    }
+
+    if (distance > 100) {
+        risk = risk + 20;
+    }
+
+
+    // Final delivery decision
+    let decision;
+
+    if (risk <= 30) {
+        decision = "Safe Delivery";
+    }
+    else if (risk <= 60) {
+        decision = "Careful Delivery";
+    }
+    else {
+        decision = "High Risk Delivery";
+    }
+
+
+    // Delivery priority
+    let priority;
+
+    if (
+        customerPriority.toLowerCase() === "vip" &&
+        packageValue > 100000
+    ) {
+        priority = "VIP Priority";
+    }
+    else {
+        priority = "Normal Priority";
+    }
+
+
+    // Return result
+    return {
+        deliveryCost: deliveryCost,
+        riskScore: risk,
+        deliveryPriority: priority,
+        finalDecision: decision
+    };
+}
+
+
+// Take input from user
+let weight = Number(prompt("Enter package weight in kg:"));
+let distance = Number(prompt("Enter distance in km:"));
+let packageValue = Number(prompt("Enter package value:"));
+
+let weather = prompt("Enter weather (normal, rain, storm):");
+let roadCondition = prompt("Enter road condition (good, bad):");
+let deliveryType = prompt("Enter delivery type (normal, express):");
+
+let failedAttempts = Number(prompt("Enter previous failed attempts:"));
+let customerPriority = prompt("Enter customer priority (normal, vip):");
+
+
+// Call the function
+let result = smartDelivery(
+    weight,
+    distance,
+    packageValue,
+    weather,
+    roadCondition,
+    deliveryType,
+    failedAttempts,
+    customerPriority
+);
+
+
+// Display result
+console.log(result);
